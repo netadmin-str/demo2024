@@ -20,6 +20,9 @@
 <p align="center">
   <img src="./pic1-16.png">
 </p>
+
+Нужно выбрать IP из тойже подсети, что и ваш сервер ESXi
+
 <p align="center">
   <img src="./pic1-17.png">
 </p>
