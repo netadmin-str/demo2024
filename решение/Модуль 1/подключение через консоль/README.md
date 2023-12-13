@@ -57,5 +57,5 @@ esxcli network firewall ruleset set --enabled=true --ruleset-id=remoteSerialPort
 
 По умолчанию пользователю root запрещен доступ через Serial консоль, поэтому залогинимся обычным пользователем.
 <p align="center">
-  <img src="./pic8.png">
+  <img src="./pic9.png">
 </p>
