@@ -24,30 +24,12 @@ systemctl status serial-getty@ttyS0.service
 
 
 #### Чтобы ESXi не блокировал трафик идущий на serial интерфейс виртуальных машин, нужно включить правило remoteSerialPort в фаерволе самого ESXi
-Для этого запустим службу ssh для подключения по SSH к самому ESXi
-<p align="center">
-  <img src="./pic4.png">
-</p>
-
-При помощи любой консоли подключаемся по ssh к ESXi. Пользователь и пароль такие же как вы подключаетесь через web браузер к ESXi
-<p align="center">
-  <img src="./pic5.png">
-</p>
 
 Проверим список правил Firewall
-```
-esxcli network firewall ruleset list
-```
-<p align="center">
-  <img src="./pic6.png">
-</p>
-
 Теперь нужно правило remoteSerialPort переключить в состояние true:
-```
-esxcli network firewall ruleset set --enabled=true --ruleset-id=remoteSerialPort
-```
+
 <p align="center">
-  <img src="./pic7.png">
+  <img src="./pic4.png">
 </p>
 
 Пробуем подключиться к нашей виртуальной машине. В качестве IP адреса выступает адрес ESXi сервера
