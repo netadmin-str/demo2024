@@ -50,7 +50,7 @@ esxcli network firewall ruleset set --enabled=true --ruleset-id=remoteSerialPort
   <img src="./pic7.png">
 </p>
 
-Пробуем подключиться к нашей виртуальной машине
+Пробуем подключиться к нашей виртуальной машине. В качестве IP адреса выступает адрес ESXi сервера
 <p align="center">
   <img src="./pic8.png">
 </p>
