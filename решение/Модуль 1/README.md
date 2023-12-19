@@ -8,11 +8,14 @@
 </p>
 
 1. Сборка стенда
-   - 1.1 Создание виртуальных подключений [->](./createVirtualConnect/README.md)
-   - 1.2 Создание виртуальной машины [->](./createVirtualMashin/README.md)
-   - 1.3 Устанорвка Alt Linux [->](./installAltLinux/README.md)
-   - 1.4 (Опционально) Настройка внеполосного управления виртуальными машинами [->](./connectToConsole/README.md)
-   - 1.5 Подключение виртуальной машины к интернету [->](./connectVirtualMashinToInternet/README.md)
-   - 1.6 Обновление до последнией версии [->](./updateAltLinux/README.md)
-   - 1.7 Установка NMTUI [->](./instalNMTui/README.md)
-   - 1.8 Соединение виртуальных машин между собой [->](./connectingVirtualMashin/README.md)
+   - 1.1 Создание виртуальных подключений [->](./createStend/createVirtualConnect/README.md)
+   - 1.2 Создание виртуальной машины [->](./createStend/createVirtualMashin/README.md)
+   - 1.3 Устанорвка Alt Linux [->](./createStend/installAltLinux/README.md)
+   - 1.4 (Опционально) Настройка внеполосного управления виртуальными машинами [->](./createStend/connectToConsole/README.md)
+   - 1.5 Подключение виртуальной машины к интернету [->](./createStend/connectVirtualMashinToInternet/README.md)
+   - 1.6 Обновление до последнией версии [->](./createStend/updateAltLinux/README.md)
+   - 1.7 Установка NMTUI [->](./createStend/instalNMTui/README.md)
+   - 1.8 Соединение виртуальных машин между собой [->](./createStend/connectingVirtualMashin/README.md)
+2. Разработка ip адресации
+    - 2.1 Заполнение таблицы [->](./createIPAddresses/README.md)
+    - 2.2 Настройка IP на интерфейсы
