@@ -57,7 +57,7 @@ cp /etc/net/ifaces/ens161/options /etc/net/ifaces/ens224/
 cp /etc/net/ifaces/ens161/options /etc/net/ifaces/ens256/
 ```
 
-Чтобы назначить IP на интерфейс нужно создать файл `/etc/net/ifaces/<NAME_INTERFACE>/ipv4address` в которм написатьт IP адрес с префиктом `1.1.1.1/30`
+Чтобы назначить IP на интерфейс нужно создать файл `/etc/net/ifaces/<NAME_INTERFACE>/ipv4address` в котором написать IP адрес с префиктом `1.1.1.1/30`
 
 ```
 echo 2.2.2.1/30 > /etc/net/ifaces/ens161/ipv4address
@@ -97,4 +97,4 @@ systemctl restart network
   <img src="./pic4.png">
 </p>
 
-Подобные манипуляции нужно проделать на всех виртуальных машинах, кроме CLI. Ее настрои чуть позже
+Подобные манипуляции нужно проделать на всех виртуальных машинах, кроме CLI. Ее настроим чуть позже
