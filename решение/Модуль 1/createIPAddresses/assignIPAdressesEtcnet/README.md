@@ -61,15 +61,16 @@ cp /etc/net/ifaces/ens161/options /etc/net/ifaces/ens256/
 
 ```
 echo 2.2.2.1/30 > /etc/net/ifaces/ens161/ipv4address
-echo 10.12.66.2/30 > /etc/net/ifaces/ens192/ipv4address
+echo 10.12.66.2/24 > /etc/net/ifaces/ens192/ipv4address
 echo 1.1.1.1/30 > /etc/net/ifaces/ens224/ipv4address
 echo 94.41.92.1/24 > /etc/net/ifaces/ens256/ipv4address
 ```
 
-На ISP добавим маршрут по умолчанию для выхода в интернет:
+На ISP добавим маршрут по умолчанию и DNS для выхода в интернет:
 
 ```
 echo default via 10.12.66.254 > /etc/net/ifaces/ens192/ipv4route
+echo nameserver 8.8.8.8 > /etc/net/ifaces/ens192/resolv.conf
 ```
 
 > [!CAUTION]

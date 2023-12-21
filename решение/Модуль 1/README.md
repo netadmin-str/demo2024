@@ -16,7 +16,16 @@
    - 1.6 Обновление до последнией версии [->](./createStend/updateAltLinux/README.md)
    - 1.7 Установка NMTUI [->](./createStend/instalNMTui/README.md)
    - 1.8 Соединение виртуальных машин между собой [->](./createStend/connectingVirtualMashin/README.md)
-2. Разработка ip адресации
-    - 2.1 Заполнение таблицы [->](./createIPAddresses/README.md)
-    - 2.2 Настройка IP на интерфейсы способ 1 [->](./createIPAddresses/assignIPAddressesNMTui/README.md)
-    - 2.2.1 Настройка IP на интерфейсы способ 2 [->](./createIPAddresses/assignIPAdressesEtcnet/README.md)
+2. Базовая настройка
+    - 2.1 Настройка HOSTNAME [->](./createIPAddresses/assignHostname/README.md)
+    - 2.2 Заполнение таблицы [->](./createIPAddresses/README.md)
+    - 2.3 Настройка IP на интерфейсы способ 1 [->](./createIPAddresses/assignIPAddressesNMTui/README.md)
+    - 2.4 Настройка IP на интерфейсы способ 2 [->](./createIPAddresses/assignIPAdressesEtcnet/README.md)
+      - 2.4.1 Настройка IP на интерфейсы HQ-R [->](./createIPAddresses/assignIPAdressesEtcnet/HQ-R.md)
+      - 2.4.2 Настройка IP на интерфейсы BR-R [->](./createIPAddresses/assignIPAdressesEtcnet/BR-R.md)
+      - 2.4.3 Настройка IP на интерфейсы HQ-SRV [->](./createIPAddresses/assignIPAdressesEtcnet/HQ-SRV.md)
+      - 2.4.3 Настройка IP на интерфейсы BR-SRV [->](./createIPAddresses/assignIPAdressesEtcnet/BR-SRV.md)
+    - 2.5 Настройка туннелей [->](./createIPAddresses/createTunnel/README.md)
+3. Настройка динамической маршрутизации
+    - 3.1 Установка FRR [->](./createDynamicRouting/installFRRtoInternet/README.md)
+    - 3.2 Настройка FRR [->](./createDynamicRouting/settingsFRR/README.md)
