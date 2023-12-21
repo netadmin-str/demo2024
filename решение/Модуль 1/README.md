@@ -18,4 +18,5 @@
    - 1.8 Соединение виртуальных машин между собой [->](./createStend/connectingVirtualMashin/README.md)
 2. Разработка ip адресации
     - 2.1 Заполнение таблицы [->](./createIPAddresses/README.md)
-    - 2.2 Настройка IP на интерфейсы
+    - 2.2 Настройка IP на интерфейсы способ 1 [->](./createIPAddresses/assignIPAddressesNMTui/README.md)
+    - 2.2.1 Настройка IP на интерфейсы способ 2 [->](./createIPAddresses/assignIPAdressesEtcnet/README.md)
