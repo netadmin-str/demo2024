@@ -46,10 +46,10 @@ echo default via 192.168.0.1 > /etc/net/ifaces/ens192/ipv4route
 sed -i -e 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/g' /etc/net/sysctl.conf
 ```
 
-Перезагружаем сеть
+Перезагружаем виртуалку
 
 ```
-systemctl restart network
+systemctl reboot
 ```
 
 Проверяем, что IP адреса настроились
