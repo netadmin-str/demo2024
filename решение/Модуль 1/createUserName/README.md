@@ -2,6 +2,16 @@
 
 ### Общий принцип такой:
 
+
+> [!CAUTION]
+> Если вы переходите в суперпользователя через команду `su`, то комманды не будут доступны
+
+<p align="center">
+  <img src="pic1.png">
+</p>
+
+Переходим в суперпользователя через `su`
+
 Создаем пользователя
 
 ```
@@ -26,7 +36,7 @@ Re-type new password: P@ssw0rd
 ## HQ-R и HQ-SRV
 
 ```
-adduser admin
+useradd admin
 usermod -aG root admin
 passwd admin
 ```
