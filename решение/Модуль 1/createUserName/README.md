@@ -23,7 +23,7 @@ Enter new password: P@ssw0rd
 Re-type new password: P@ssw0rd
 ```
 
-## HQ-SRV
+## HQ-R и HQ-SRV
 
 ```
 adduser admin
