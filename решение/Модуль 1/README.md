@@ -32,3 +32,4 @@
     - 2.2 Настройка FRR [->](./createDynamicRouting/settingsFRR/README.md)
 3. Настройка автоматического распределения IP-адресов на роутере HQ-R [->](./createDHCPServer//README.md)
 4. Создание пользователей [->](./createUserName/README.md)
+5. Проверка пропускной способности при помощи `iperf3` [->](./iperf/README.md)
