@@ -16,6 +16,7 @@
    - 0.6 Обновление до последнией версии [->](./createStend/updateAltLinux/README.md)
    - 0.7 Установка NMTUI [->](./createStend/instalNMTui/README.md)
    - 0.8 Соединение виртуальных машин между собой [->](./createStend/connectingVirtualMashin/README.md)
+   - 0.9 Создание локального репозитория [->](./createStend/createLocalRepo/README.md)
 1. Базовая настройка
     - 1.1 Настройка HOSTNAME [->](./createIPAddresses/assignHostname/README.md)
     - 1.2 Заполнение таблицы [->](./createIPAddresses/README.md)
