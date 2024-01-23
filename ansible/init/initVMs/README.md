@@ -1,5 +1,12 @@
 ### Подготовка виртуальных машин к управлению через SSH
 
+На всех виртуальных машинах нужно установить `open-vm-tools-desktop` и `sshpass`
+
+```
+apt-get install open-vm-tools-desktop
+apt-get install sshpass
+```
+
 На вашем `ESXi` хосте создайте дополнительну `portgroup` с названием `ansible`
 
 <p align="center">

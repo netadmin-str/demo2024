@@ -2,10 +2,6 @@
 
 Для того, чтобы данный способ работал нужно на виртуалку установить `open-vm-tools-desktop`
 
-```
-apt-get install open-vm-tools-desktop
-```
-
 В папке с виртуальным окружение создайте `playbook` с название `changeHostname.yaml`
 
 ```
