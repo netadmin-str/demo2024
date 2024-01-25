@@ -4,10 +4,10 @@
 
 ```
 ---
-- name: Show version
+- name: Init settings
   hosts: VMs
   tasks:
-    - name: Set hostname
-      ansible.builtin.hostname:
-        name: {{ inventory_hostname }}
+  - name: Set hostname
+    ansible.builtin.hostname:
+      name: {{ inventory_hostname }}
 ```
