@@ -9,5 +9,7 @@
   tasks:
   - name: Set hostname
     ansible.builtin.hostname:
-      name: {{ inventory_hostname }}
+      name: "{{ inventory_hostname }}"
 ```
+
+Проверяем ``
