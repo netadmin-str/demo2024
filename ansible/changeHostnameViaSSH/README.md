@@ -4,11 +4,10 @@
 
 ```
 ---
-
-- name: show version
+- name: Show version
   hosts: VMs
   tasks:
-  - name: "update hostnames"
-    hostname:
-      name: "{{ hostname }}" # Эта переменная берется из hosts.ini
+    - name: Set hostname
+      ansible.builtin.hostname:
+        name: {{ inventory_hostname }}
 ```

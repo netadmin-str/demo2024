@@ -17,11 +17,11 @@ host_key_checking = False
 10.12.66.1
 
 [VMs]
-10.15.15.2 hostname=ISP
-10.15.15.3 hostname=HQ-R
-10.15.15.4 hostname=BR-R
-10.15.15.5 hostname=HQ-SRV
-10.15.15.6 hostname=BR-SRV
+ISP ansible_ssh_host=10.15.15.2
+HQ-R ansible_ssh_host=10.15.15.3
+BR-R ansible_ssh_host=10.15.15.4
+HQ-SRV ansible_ssh_host=10.15.15.5
+BR-SRV ansible_ssh_host=10.15.15.6
 
 [VMs:vars]
 ansible_connection=ssh 
