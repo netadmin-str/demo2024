@@ -8,4 +8,6 @@
    - 0.5 Начальная настройка Ansible [->](./init/initSettings/README.md)
    - 0.5 Начальная настройка VMs [->](./init/initVMs/README.md)
 1. Базовая настройка
-   - 1.1 Настройка HOSTNAME [->](./changeHostname/README.md)
+   - 1.1 Настройка HOSTNAME 
+      - 1.1.1 через ESXi [->](./changeHostnameViaESXi/README.md)
+      - 1.1.2 через SSH [->](./changeHostnameViaSSH/README.md)
