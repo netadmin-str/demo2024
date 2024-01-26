@@ -12,4 +12,4 @@
       - 1.1.1 через ESXi [->](./changeHostnameViaESXi/README.md)
       - 1.1.2 через SSH [->](./changeHostnameViaSSH/README.md)
    - 1.2 Настройка IP на интерфейсы [->](./assignIpAddress/README.md)
-   - 1.2.1 Создание модульной структуры проекта 
+   - 1.2.1 Создание модульной структуры проекта [->](./createStructireProject/README.md)
