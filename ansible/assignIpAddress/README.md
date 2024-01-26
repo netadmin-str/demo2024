@@ -3,11 +3,6 @@
 ```
 ---
 
-- name: Init settings
-  hosts: VMs
-  tags:
-    - skip_ansible_lint
-  tasks:
     - name: Create folder for interfaces
       ansible.builtin.file:
         path: "/etc/net/ifaces/{{ item['ifname'] }}"
@@ -33,8 +28,16 @@
     - name: Enable routing
       shell:
         cmd: "sed -i -e 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/g' /etc/net/sysctl.conf"
+    - name: Setting default gateway on Servers
+      when: item['gw'] is defined
+      ansible.builtin.copy:
+        dest: "/etc/net/ifaces/{{ item['ifname'] }}/ipv4route"
+        content: "default via {{ item['gw'] }}"
+        mode: '0777'
+      loop: "{{ vars.vars.interfaces }}"
     - name: Restart network
       ansible.builtin.systemd:
         name: network
         state: restarted
+
 ```

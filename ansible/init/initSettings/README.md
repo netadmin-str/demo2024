@@ -29,41 +29,31 @@ VMs:
       vars:
         interfaces: [
           { ifname: 'ens192', ifaddr: '192.168.0.1', mask: '/25'},
-          { ifname: 'ens224', ifaddr: '1.1.1.2', mask: '/30'}
+          { ifname: 'ens224', ifaddr: '1.1.1.2', mask: '/30', gw: '1.1.1.1'}
         ]
     BR-R:
       ansible_ssh_host: 10.15.15.4
       vars:
         interfaces: [
-          { ifname: 'ens192', ifaddr: '2.2.2.2', mask: '/30'},
+          { ifname: 'ens192', ifaddr: '2.2.2.2', mask: '/30', gw: '2.2.2.1'},
           { ifname: 'ens224', ifaddr: '192.168.0.129', mask: '/27'}
         ]
     HQ-SRV:
       ansible_ssh_host: 10.15.15.5
       vars:
         interfaces: [
-          { ifname: 'ens192', ifaddr: '192.168.0.2', mask: '/25'}
+          { ifname: 'ens192', ifaddr: '192.168.0.2', mask: '/25', gw: '192.168.0.1'}
         ]
-        gw: '192.168.0.1'
+        
     BR-SRV:
       ansible_ssh_host: 10.15.15.6
       vars:
         interfaces: [
-          { ifname: 'ens192', ifaddr: '192.168.0.130', mask: '/27'}
-        ]
-      gw: '192.168.0.129'
+          { ifname: 'ens192', ifaddr: '192.168.0.130', mask: '/27', gw: '192.168.0.129'}
+        ] 
   vars:
     ansible_connection: ssh 
     ansible_user: root
     ansible_password: P@ssw0rd
 
-cisco_host:
-  hosts:
-    R1:
-      ansible_ssh_host: 10.15.15.9
-  vars:
-    ansible_connection: network_cli
-    ansible_network_os: ios
-    ansible_user: admin
-    ansible_password: cisco
 ```
