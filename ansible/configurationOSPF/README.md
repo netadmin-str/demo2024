@@ -13,7 +13,7 @@
         rm /etc/apt/sources.list.d/alt.list
         apt-repo add 'rpm-dir file:/mnt x86-64 classic'
 
-    - name: Mount DVD dick witch repo
+    - name: Mount DVD-disk witch repo
       shell: |
         umount -a
         mkdir -p /mnt/x86-64/
@@ -57,7 +57,7 @@ pip install netaddr
 Следующим действием монтируем DVD-диск с репозиторием
 
 ```
-    - name: Mount DVD dick witch repo
+    - name: Mount DVD-disk witch repo
       shell: |
         umount -a
         mkdir -p /mnt/x86-64/
