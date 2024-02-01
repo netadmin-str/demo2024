@@ -14,3 +14,4 @@
    - 1.2 Настройка IP на интерфейсы [->](./assignIpAddress/README.md)
    - 1.2.1 Создание модульной структуры проекта [->](./createStructireProject/README.md)
    - 1.3 Создание туннельных интерфейсов [->](./createTunnelInterfaces/README.md)
+   - 1.4 Установка и настройка OSPF [->](./configurationOSPF/README.md)
