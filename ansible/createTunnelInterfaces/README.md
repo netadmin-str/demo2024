@@ -1,62 +1,71 @@
-### Создание туннельных интерфейсов.
-
-Перед написанием сценария нужно добавить тунельные интерфейсы в инвентарный файл.
-
-Но в дальнешем мы сталкнемся с проблемой как программой поймет что это туннельный интерфейс ведь настройка обычного интерфейса и туннельного отличается.
-
-Поэтому предварительно у `каждого` интерфейса в инвентарном файле укажем его тип:
+### Настрока шлюза по умолчанию и туннельных интерфейсов
 
 ```
-{ ifname: 'ens192', type: 'eth', ifaddr: '2.2.2.2', mask: '/30', gw: '2.2.2.1'}
-```
+---
 
-После этого добавим на `HQ-R` и `BR-R` информацию о туннельных интерфейсах. Будте внимательный с названием интерфеса к которому привязываем туннель.
+- name: Настраиваем DG для виртуальных машин
+  hosts: VMs
+  tasks:
+    - name: Устанавливаем default_interface
+      when:
+        - ansible_facts[item].ipv4.address is defined
+        - vars.vars.interfaces | selectattr('gw','defined')
+        - vars.vars.interfaces | selectattr('gw','defined') | map(attribute='ifaddr') | first == ansible_facts[item].ipv4.address
+      ansible.builtin.set_fact:
+        default_interface: "{{ item }}"
+        default_ip: "{{vars.vars.interfaces | selectattr('gw','defined') | map(attribute='gw') | first}}"
+      loop: "{{ ansible_facts.interfaces }}"
 
-```
-HQ-R:
-    ansible_ssh_host: 10.15.15.3
-    vars:
-    interfaces: [
-        { ifname: 'ens192', type: 'eth', ifaddr: '192.168.0.1', mask: '/25'},
-        { ifname: 'ens224', type: 'eth', ifaddr: '1.1.1.2', mask: '/30', gw: '1.1.1.1'},
-        { ifname: 'tun1', type: 'iptun', ifaddr: '172.16.0.1', mask: '/30', tunlocal: '1.1.1.2', tunremote: '2.2.2.2', interface: 'ens224'}
-    ]
-BR-R:
-    ansible_ssh_host: 10.15.15.4
-    vars:
-    interfaces: [
-        { ifname: 'ens192', type: 'eth', ifaddr: '2.2.2.2', mask: '/30', gw: '2.2.2.1'},
-        { ifname: 'ens224', type: 'eth', ifaddr: '192.168.0.129', mask: '/27'},
-        { ifname: 'tun1', type: 'iptun', ifaddr: '172.16.0.2', mask: '/30', tunlocal: '2.2.2.2', tunremote: '1.1.1.2', interface: 'ens192'}
-    ]
-```
+    - name: Настраиваем шлюз для устройств
+      when: default_interface is defined
+      ansible.builtin.copy:
+        dest: "/etc/net/ifaces/{{ default_interface }}/ipv4route"
+        content: "default via {{ default_ip }}"
+        mode: '0777'
 
-## Написание сценария
+    - name: Включаем маршрутизацию
+      shell:
+        cmd: "sed -i -e 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/g' /etc/net/sysctl.conf"
 
-Внесем изменения в файл `setIpAddress.yaml` таким образом чтобы задача по созданию файла `options` выполнялась по условию
+    - name: Перезагружаем сеть
+      ansible.builtin.systemd:
+        name: network
+        state: restarted
 
-```
-- name: Creating a file options for  ether interfaces
-  when: item['type'] == 'eth' # Выполнится только для интерфейсов с типом eth
-  ansible.builtin.copy:
-    dest: "/etc/net/ifaces/{{ item['ifname'] }}/options"
-    content: "TYPE=eth
-    DISABLE=no
-    NM_CONTROLLED=no
-    BOOTPROTO=static
-    CONFIG_IPV4=yes"
-    mode: '0777'
-  loop: "{{ vars.vars.interfaces }}"
-- name: Creating a file options for tunnel interfaces
-  when: item['type'] == 'iptun' # Выполнится для интерфесов с типом iptun
-  ansible.builtin.copy:
-    dest: "/etc/net/ifaces/{{ item['ifname'] }}/options"
-    content: "TYPE=iptun
-      TUNTYPE=gre
-      TUNLOCAL={{ item['tunlocal'] }}
-      TUNREMOTE={{ item['tunremote'] }}
-      TUNOPTIONS='ttl 64'
-      HOST={{ item['interface'] }}"
-    mode: '0777'
-  loop: "{{ vars.vars.interfaces }}"
+- name: Настраиваем Tunnel для виртуальных машин
+  hosts: VMs
+  tasks:
+    - name: Creating a folder for interfaces
+      when: vars.vars.tunnels is defined
+      ansible.builtin.file:
+        path: "/etc/net/ifaces/{{ item['ifname'] }}"
+        state: directory
+        mode: '0777'
+      loop: "{{ vars.vars.tunnels }}"
+
+    - name: Creating a file with IP address
+      when: vars.vars.tunnels is defined
+      ansible.builtin.copy:
+        dest: "/etc/net/ifaces/{{ item['ifname'] }}/ipv4address"
+        content: "{{ item['ifaddr']+item['mask'] }}"
+        mode: '0777'
+      loop: "{{ vars.vars.tunnels }}"
+
+    - name: Creating a file options for tunnel interfaces
+      when: vars.vars.tunnels is defined
+      ansible.builtin.copy:
+        dest: "/etc/net/ifaces/{{ item['ifname'] }}/options"
+        content: "TYPE=iptun
+          TUNTYPE=gre
+          TUNLOCAL={{ item['tunlocal'] }}
+          TUNREMOTE={{ item['tunremote'] }}
+          TUNOPTIONS='ttl 64'
+          HOST={{ default_interface }}"
+        mode: '0777'
+      loop: "{{ vars.vars.tunnels }}"
+
+    - name: Перезагружаем сеть
+      ansible.builtin.systemd:
+        name: network
+        state: restarted
 ```
