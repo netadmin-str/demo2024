@@ -1,16 +1,14 @@
-### Изменение hostname через SSH
+# Изменение hostname
 
-Создаем `play-book` с названием `changeHostnameViaSSH.yaml`
+Итоговый `play-book`
 
 ```
 ---
 
-- name: Init settings
+- name: Настройка hostname
   hosts: VMs
-  tags:
-    - skip_ansible_lint
   tasks:
-    - name: Set hostname
+    - name: Меняем имя хоста
       ansible.builtin.hostname:
         name: "{{ inventory_hostname }}"
 ```

@@ -7,11 +7,11 @@
 ```
 ---
 
-- name: show version
+- name: Настрока hostname
   hosts: esxi
   connection: local
   tasks:
-    - name: Change hostname of guest machine
+    - name: Меняем имя хоста
       community.vmware.vmware_vm_shell:
         validate_certs: no
         hostname: "10.12.66.1"  # IP вашего ESXi

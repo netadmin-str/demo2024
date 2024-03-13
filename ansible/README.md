@@ -12,5 +12,6 @@
    - 1.1 Настройка виртуальных сетей [->](./createStend/createVirualNet/README.md)
    - 1.2 Разворачивание виртуальных машин [->](./createStend/deployVMs/README.md)
 2. Начальная настрока машин.
-   - 2.1 Настройка шлюза по умолчанию и теннелей. [->](./createTunnelInterfaces/README.md)
-   - 2.2 Монтируем локалный репозиторий на DVD диске [->](./mount-local-repo/README.md)
+   - 2.1 Монтируем локалный репозиторий на DVD диске [->](./mount-local-repo/README.md)
+   - 2.2 Настраиваем имя хоста [->](./changeHostnameViaSSH/README.md)
+   - 2.3 Настройка шлюза по умолчанию и туннелей. [->](./createTunnelInterfaces/README.md)
