@@ -13,3 +13,4 @@
    - 1.2 Разворачивание виртуальных машин [->](./createStend/deployVMs/README.md)
 2. Начальная настрока машин.
    - 2.1 Настройка шлюза по умолчанию и теннелей. [->](./createTunnelInterfaces/README.md)
+   - 2.2 Монтируем локалный репозиторий на DVD диске [->](./mount-local-repo/README.md)
