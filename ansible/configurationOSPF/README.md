@@ -1,37 +1,25 @@
-### Настройка OSPF
+# Установка и настройка FRR
 
-Создаем play-book c именем `installFRR.yaml`
+Законченный play-book
 
 ```
 ---
 
-- name: install FRR
+- name: Установка и настрока FRR
   hosts: HQ-R, BR-R
   tasks:
-    - name: Replase repo on DVD
-      shell: |
-        rm /etc/apt/sources.list.d/alt.list
-        apt-repo add 'rpm-dir file:/mnt x86-64 classic'
-
-    - name: Mount DVD-disk witch repo
-      shell: |
-        umount -a
-        mkdir -p /mnt/x86-64/
-        mount /dev/sr0 /mnt/x86-64/
-        apt-get update
-
-    - name: Install FRR
+    - name: Устанавливаем пакет frr
       shell: apt-get install -y frr
 
-    - name: Enable OSPF
+    - name: Включаем OSPF
       shell: sed -i -e 's/ospfd=no/ospfd=yes/g' /etc/frr/daemons
 
-    - name: Create configuration
+    - name: Создаем конфигурацию из шаблона
       template:
         src=ospf.j2
         dest=/etc/frr/frr.conf
 
-    - name: Restart FRR
+    - name: Перезагружаем FRR
       ansible.builtin.systemd:
         name: frr
         state: restarted
@@ -45,37 +33,17 @@
 pip install netaddr
 ```
 
-Эта задача заменяет репозитории в интернете на локальные. Заметьте, то диск с репозиторием должен быть подключен к виртуальной машине
-
-```
-    - name: Replase repo on DVD
-      shell: |
-        rm /etc/apt/sources.list.d/alt.list
-        apt-repo add 'rpm-dir file:/mnt x86-64 classic'
-```
-
-Следующим действием монтируем DVD-диск с репозиторием
-
-```
-    - name: Mount DVD-disk witch repo
-      shell: |
-        umount -a
-        mkdir -p /mnt/x86-64/
-        mount /dev/sr0 /mnt/x86-64/
-        apt-get update
-```
-
 Устанавливаем `OSPF`
 
 ```
-    - name: Install FRR
+    - name: Устанавливаем пакет frr
       shell: apt-get install -y frr
 ```
 
 Включаем `OSPF` в `FRR`
 
 ```
-    - name: Enable OSPF
+    - name: Включаем OSPF
       shell: sed -i -e 's/ospfd=no/ospfd=yes/g' /etc/frr/daemons
 ```
 
@@ -114,7 +82,7 @@ exit
 ```
 
 Это блок условия. Мы проверяем определена ли переменная `item.ospf`.
-Она береться из инвентарного файла. Для этого мы ее туда добавим вручную чуть позже
+Она береться из инвентарного файла.
 
 ```
 {% if item.ospf is defined %}
@@ -161,7 +129,7 @@ network {{ ipv4_host | ansible.utils.ipaddr('network/prefix') }} area 0
 Эта задача гененируем конфигурацию OSPF для каждого хоста
 
 ```
-    - name: Create configuration
+    - name: Создаем конфигурацию из шаблона
       template:
         src=ospf.j2
         dest=/etc/frr/frr.conf
@@ -170,7 +138,7 @@ network {{ ipv4_host | ansible.utils.ipaddr('network/prefix') }} area 0
 Перезагружаем FRR
 
 ```
-    - name: Restart FRR
+    - name: Перезагружаем FRR
       ansible.builtin.systemd:
         name: frr
         state: restarted

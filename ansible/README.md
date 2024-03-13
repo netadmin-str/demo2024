@@ -15,3 +15,4 @@
    - 2.1 Монтируем локалный репозиторий на DVD диске [->](./mount-local-repo/README.md)
    - 2.2 Настраиваем имя хоста [->](./changeHostnameViaSSH/README.md)
    - 2.3 Настройка шлюза по умолчанию и туннелей. [->](./createTunnelInterfaces/README.md)
+   - 2.3 Установка и настрока FRR [->](./configurationOSPF/README.md)
