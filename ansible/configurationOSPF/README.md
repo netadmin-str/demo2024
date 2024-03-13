@@ -55,18 +55,27 @@ pip install netaddr
 log file /var/log/frr/frr.log
 no ipv6 forwarding
 !
-interface tun1
+interface tunnel1
  no ip ospf passive
 exit
 !
 router ospf
  passive-interface default
+
 {% for item in vars.vars.interfaces %}
-{% if item.ospf is defined %}
-{% set ipv4_host = item.ifaddr+item.mask %}
-network {{ ipv4_host | ansible.utils.ipaddr('network/prefix') }} area 0
-{% endif %}
+    {% if item.ospf is defined %}
+        {% set ipv4_host = item.ifaddr+item.mask %}
+        network {{ ipv4_host | ansible.utils.ipaddr('network/prefix') }} area 0
+    {% endif %}
 {% endfor %}
+
+{% for item in vars.vars.tunnels %}
+    {% if item.ospf is defined %}
+        {% set ipv4_host = item.ifaddr+item.mask %}
+        network {{ ipv4_host | ansible.utils.ipaddr('network/prefix') }} area 0
+    {% endif %}
+{% endfor %}
+
 exit
 !
 ```
@@ -102,31 +111,9 @@ exit
 network {{ ipv4_host | ansible.utils.ipaddr('network/prefix') }} area 0
 ```
 
-Теперь добавим в инвентарный файл метку для интерфейсов, которые будут задействованны в `OSPF`
+Такие же действия делаем для туннельных интерфейсов.
 
-```
-    HQ-R:
-      ...
-      vars:
-        ...
-        interfaces: [
-          { ifname: 'ens192', type: 'eth', ifaddr: '192.168.0.1', mask: '/25', ospf: true},
-        ...
-          { ifname: 'tun1', type: 'iptun', ifaddr: '172.16.0.1', mask: '/30', tunlocal: '1.1.1.2', tunremote: '2.2.2.2', interface: 'ens224', ospf: true }
-        ]
-    BR-R:
-      ...
-      vars:
-        ....
-        interfaces: [
-          ...
-          { ifname: 'ens224', type: 'eth', ifaddr: '192.168.0.129', mask: '/27', ospf: true},
-          { ifname: 'tun1', type: 'iptun', ifaddr: '172.16.0.2', mask: '/30', tunlocal: '2.2.2.2', tunremote: '1.1.1.2', interface: 'ens192', ospf: true}
-        ]
-
-```
-
-Эта задача гененируем конфигурацию OSPF для каждого хоста
+Эта задача гененируем конфигурацию OSPF для каждого хоста.
 
 ```
     - name: Создаем конфигурацию из шаблона
